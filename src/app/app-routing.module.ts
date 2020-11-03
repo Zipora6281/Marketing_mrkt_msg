@@ -4,7 +4,7 @@ import {TableComponent} from './table/table.component';
 import {TableDetailsComponent } from './table-details/table-details.component';
 
 const routes: Routes = [
-  {component:TableComponent, path:"table"},
+  {component:TableComponent, path:""},
 {component:TableDetailsComponent , path:"tabledetails"}
 ];
 

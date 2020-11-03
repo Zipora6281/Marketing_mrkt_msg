@@ -1,61 +1,61 @@
-
 <div class="example-button-container">
-  <button  (click)= "create()">
+  <button (click)="create()">
     <mat-icon>add</mat-icon>
   </button>
 </div>
-<!-- mat-mini-fab disabled העיצוב של ההוספה לא עובד יחד עם הלחיצה  -->
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-           <!-- Status Column -->
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef> סטטוס </th>
-      <form [formGroup]="formGroup" ngNativeValidate>
-      <td mat-cell *matCellDef="let element"  >  <mat-slide-toggle  [checked]="element.status"></mat-slide-toggle>
-         </td>
-      </form>
+
+    <td>
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef> סטטוס </th>
+    <form [formGroup]="formGroup" ngNativeValidate>
+    <td mat-cell *matCellDef="let element">
+      <mat-slide-toggle [checked]="message.status"></mat-slide-toggle>
+    </td>
     </ng-container>
+    </td>
     <!-- branch Column -->
     <ng-container matColumnDef="branch">
       <th mat-header-cell *matHeaderCellDef> ענף</th>
-      <td mat-cell *matCellDef="let element"> {{element.branch}} </td>
+      <td mat-cell *matCellDef="let element"> {{message.branch}} </td>
     </ng-container>
     <!-- sequence Column -->
-   <ng-container matColumnDef="sequence">
-    <th mat-header-cell *matHeaderCellDef> תדירות </th>
-    <td mat-cell *matCellDef="let element">   {{element.sequence}}</td>
-  </ng-container>
-   <!-- message Column -->
-   <ng-container matColumnDef="message">
-    <th mat-header-cell *matHeaderCellDef> הודעה </th>
-    <td mat-cell *matCellDef="let element"> {{element.message}} </td>
-  </ng-container>
-
-     <!-- day Column -->
-     <ng-container matColumnDef="day">
-      <th mat-header-cell *matHeaderCellDef> יום בשבוע </th>
-      <td mat-cell *matCellDef="let element">  {{element.day}} </td>
+    <ng-container matColumnDef="sequence">
+      <th mat-header-cell *matHeaderCellDef> תדירות </th>
+      <td mat-cell *matCellDef="let element"> {{message.sequence}}</td>
+        <input matInput [(ngModel)]="sequence" type="number">
     </ng-container>
 
-     <!-- huor Column -->
-  <ng-container matColumnDef="hour">
-    <th mat-header-cell *matHeaderCellDef> שעה </th>
-    <td mat-cell *matCellDef="let element">  
-     {{huor | date:'hh:mm'}} </td>
-  </ng-container>
-       <!-- edit Column -->
-       <ng-container matColumnDef="edit">
-        <th mat-header-cell *matHeaderCellDef> ערוך </th>
-        <td mat-cell *matCellDef="let element">  
-            <button mat-mini-fab disabled>
-                <mat-icon>create</mat-icon>
-              </button>
-              </td>
-      </ng-container>
+    <!-- message Column -->
+    <ng-container matColumnDef="message">
+      <th mat-header-cell *matHeaderCellDef> הודעה </th>
+      <td mat-cell *matCellDef="let element"> {{message.message}} </td>
+    </ng-container>
+
+    <!-- day Column -->
+    <ng-container matColumnDef="day">
+      <th mat-header-cell *matHeaderCellDef> יום בשבוע </th>
+      <td mat-cell *matCellDef="let element"> {{message.day}} </td>
+    </ng-container>
+
+    <!-- huor Column -->
+    <ng-container matColumnDef="hour">
+      <th mat-header-cell *matHeaderCellDef> שעה </th>
+      <td mat-cell *matCellDef="let message">
+        {{huor | date:'hh:mm'}} </td>
+    </ng-container>
+    <!-- edit Column -->
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef> ערוך </th>
+      <td mat-cell *matCellDef="let message">
+        <button mat-mini-fab disabled>
+          <mat-icon>create</mat-icon>
+        </button>
+      </td>
+    </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  
-  
+
+</table>
