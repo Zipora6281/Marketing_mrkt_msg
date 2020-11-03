@@ -1,0 +1,13 @@
+table {
+    width: 100%;
+ 
+  }
+  .ng-container{
+    direction: rtl;
+  }
+  mat-icon{
+color:   #f45a4e;
+  }
+  ::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color: #f45a4e; 
+}

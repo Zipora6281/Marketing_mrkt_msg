@@ -1,0 +1,40 @@
+<div class="example-container">
+   <button mat-mini-fab disabled (click)="delete()">
+  <mat-icon>delete</mat-icon> </button>          
+  <button mat-mini-fab disabled >
+     <mat-icon>send</mat-icon></button>          
+    <mat-slide-toggle></mat-slide-toggle>
+     <br>             
+    <mat-form-field appearance="fill">
+                <input matInput>
+                <mat-label>הודעה</mat-label>
+                <textarea matInput></textarea>
+              </mat-form-field>
+              <br>
+            <mat-form-field appearance="fill">
+                <input matInput>
+                <mat-label>תדירות</mat-label>
+             <mat-select>
+                       <mat-option *ngFor= "let sequence of sequences" [value]= "sequence.value">
+                         {{sequence.viewValue}}
+                  </mat-option>
+                        </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <input matInput placeholder="Placeholder">
+                <mat-label>יום</mat-label>
+      <mat-select>
+        <mat-option *ngFor= "let day of days" [value]= "day">{{day}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>חוזר</mat-label>
+        <input matInput [(ngModel)]="pageSize" type="number">
+      </mat-form-field>
+            <mat-form-field appearance="fill">
+                    <input matInput placeholder="Placeholder">
+              <mat-label>Textarea</mat-label>
+              <textarea matInput></textarea>
+            </mat-form-field>
+</div>
