@@ -10,14 +10,21 @@ import { HttpClient } from '@angular/common/http';
 })
 export class MessageService {
   private url=environment.base_url+"message";
+
   constructor(private http:HttpClient) {}
-  getAllMessages():Observable<Message>{
-  return this.http.get<Message>(this.url);
+
+  getAllMessages():Observable<Message[]>{
+  return this.http.get<Message[]>(this.url);
   }
   editMessage(id:number,message:Message){
-    const url=`this.url\{$id}`;
-    return this.http.put<Message>(url,Message );
+    const url=`this.url\{$id}`;//??good?
+    return this.http.put<Message>(url,Message);
   }
- 
-
+  deleteMessage(id:number){
+    const url=`this.url\{$id}`;
+    return this.http.delete(url);
+  }
+  createMessage(message:Message){
+    this.http.post(this.url,message);
+  }
 }

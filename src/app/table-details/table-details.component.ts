@@ -5,9 +5,26 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import {MatDialog ,MatDialogConfig } from '@angular/material/dialog'
 import { PopUpComponent } from '../pop-up/pop-up.component';
+import {MessageService} from '../services/message.service';
+import {Message} from '../models/message';
 
-
-
+export interface PeriodicElement {
+  message: string;
+  sequence: number;
+  branch: string;
+  status: boolean;
+  day:string;
+  hour:Date;
+}
+const ELEMENT_DATA: PeriodicElement[] = [
+  {sequence: 1, message: 'Hydrogen', branch: '0079', status: true,day:'hh',hour:new Date()},
+  {sequence: 2, message: 'Helium', branch: '0026', status: true, day:'חיעימעיכ',hour:new Date()},
+  {sequence: 3, message: 'Lithium', branch: '6', status: false, day: '',hour:new Date()},
+  {sequence: 4, message: 'Beryllium', branch: '9.0122', status: false, day:'Sunday',hour:new Date()},
+  ];
+export class DatePipeComponent {
+  today: number = Date.now();
+}
 @Component({
   selector: 'app-table-details',
   templateUrl: './table-details.component.html',
@@ -20,35 +37,26 @@ export class TableDetailsComponent implements AfterViewInit {
 
   
   huor:Date=new Date();
-
+  messages:Message[];
   displayedColumns: string[] = ['edit','hour','day','sequence', 'message', 'branch', 'status'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  formGroup: FormGroup;
-
+  private formGroup: FormGroup;
+  
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(formBuilder: FormBuilder, 
-    private dialog :MatDialog) {
-    this.formGroup = formBuilder.group({
-      enableWifi: '',
-      acceptTerms: ['', Validators.requiredTrue]
-    });
-  }
-  // hours:Date[]=[];
-  // fiilHours(){
-  //   for (let h = 0; h < 24; h++) {
-  //     const hh = h > 9 ? "" + h: "0" + h;
-  //     for(let m = 0; m < 60; m += 15) {
-  //       const mm = m > 9 ? "" + m: "0" + m;
-  //       this.hours.push(`${hh}:${mm}`);
-  //     }
-  //   }
-  // }
+    constructor(private formBuilder: FormBuilder, 
+    private dialog :MatDialog,
+    private messageService:MessageService) {}
+    
+
+    
+
   ngAfterViewInit(): void {
      this.dataSource.paginator = this.paginator;
   }
  
   ngOnInit(): void {
+    this.GetMessages();
   }
 
 
@@ -56,27 +64,15 @@ export class TableDetailsComponent implements AfterViewInit {
     this.dialog.open(PopUpComponent)
   }
 
-  edit(row){}
+  edit(row){
+  }
+
+  GetMessages(){
+    this.messageService.getAllMessages().subscribe(res=>{this.messages=res});
+  }
+
 }
- 
-export interface PeriodicElement {
-  message: string;
-  sequence: number;
-  branch: string;
-  status: boolean;
-  day:string;
-  hour:Date;
-}
-
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {sequence: 1, message: 'Hydrogen', branch: '0079', status: true,day:'hh',hour:new Date()},
-  {sequence: 2, message: 'Helium', branch: '0026', status: true, day:'חיעימעיכ',hour:new Date()},
-  {sequence: 3, message: 'Lithium', branch: '6', status: false, day: '',hour:new Date()},
-  {sequence: 4, message: 'Beryllium', branch: '9.0122', status: false, day:'Sunday',hour:new Date()},
-];
-
- // Get the current date and time as a date-time value.
- export class DatePipeComponent {
-   today: number = Date.now();
- };
+// this.formGroup = formBuilder.group({
+//   enableWifi: '',
+//   acceptTerms: ['', Validators.requiredTrue]
+// });
